@@ -1,7 +1,7 @@
 const operationSuggestion = document.getElementById("operation-suggestion");
 const computerScreen = document.getElementById("computer-screen");
 let roll = {
-  status: "",
+  status: "closeFull",
   level: 0, // 2 is Maximum
   isRollDown: false,
 };
