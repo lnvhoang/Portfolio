@@ -1,6 +1,7 @@
 const operationSuggestion = document.getElementById("operation-suggestion");
 const computerScreen = document.getElementById("computer-screen");
 let roll = {
+  status: "",
   level: 0, // 2 is Maximum
   isRollDown: false,
 };
@@ -48,23 +49,31 @@ document.addEventListener("wheel", function (event) {
     if (roll.level == 1) {
       computerScreen.style.animation =
         "move-transform 0.2s ease-out forwards, move-center 0.3s ease-out forwards";
+      roll.status = "";
     }
     if (roll.level == 2) {
-      computerScreen.style.animation =
-        "move-full-screen 0.2s ease-out forwards";
+      if (roll.status == "") {
+        computerScreen.style.animation =
+          "move-full-screen 0.2s ease-out forwards";
+        roll.status = "openFull";
+      }
     }
   } else {
     if (roll.level == 0) {
-      computerScreen.style.animation =
-        "move-center-back 0.3s ease-out forwards";
-      setTimeout(() => {
+      if (roll.status == "") {
         computerScreen.style.animation =
-          "move-transform-back 0.2s ease-out forwards";
-      }, 300);
+          "move-center-back 0.3s ease-out forwards";
+        setTimeout(() => {
+          computerScreen.style.animation =
+            "move-transform-back 0.2s ease-out forwards";
+        }, 300);
+        roll.status = "closeFull";
+      }
     }
     if (roll.level == 1) {
       computerScreen.style.animation =
         "move-full-screen-back 0.2s ease-out forwards";
+      roll.status = "";
     }
   }
 });
